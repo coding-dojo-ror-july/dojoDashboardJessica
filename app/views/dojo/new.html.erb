@@ -1,8 +1,8 @@
 <h1>New Dojo</h1>
-<% if flash[:error] %>
-  	<div id="error">
-  		<p><%= flash[:error] %></p>
-	</div>
+<% if flash[:errors] %>
+  	<% flash[:errors].each do |error| %>
+  		<p><%= error %></p>
+    <% end %>
 <% end %>
 <form action="/dojos/create" method="POST">
   <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">

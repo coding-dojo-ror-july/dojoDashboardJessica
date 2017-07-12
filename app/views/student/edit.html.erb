@@ -1,0 +1,27 @@
+<h1>Editing <%= @student.first_name %> <%= @student.last_name %></h1><br>
+<% if flash[:errors] %>
+  	<% flash[:errors].each do |error| %>
+  		<p><%= error %></p>
+    <% end %>
+<% end %>
+<form action="/dojos/<%= @dojo.id %>/students/<%= @student.id %>" method="POST">
+    <input type="hidden" name="_method" value="patch"> 
+  <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+  <label for="first_name" >First Name</label>
+  <input type="text" name="first_name" value="<%= @student.first_name %>"></input><br> 
+  <label for="last_name" >Last Name</label>
+  <input type="text" name="last_name" value="<%= @student.last_name %>"></input><br>
+  <label for="email" >Email</label>
+  <input type="text" name="email" value="<%= @student.email %>"></input><br>
+  <label for="dojo">Dojo</label>
+  <select name="dojo">
+      <% @dojos.each do |dojo| %>
+        <% if dojo.id == @dojo.id %>
+            <option selected value="<%= dojo.id %>"><%= dojo.branch %></option>
+        <% else %>
+            <option value="<%= dojo.id %>"><%= dojo.branch %></option>
+        <% end %>        
+      <% end %>
+  </select>    
+  <button type="submit">Update</button>
+</form>  

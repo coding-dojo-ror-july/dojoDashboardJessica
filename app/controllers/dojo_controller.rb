@@ -9,10 +9,33 @@ class DojoController < ApplicationController
     def create 
         @dojo = Dojo.new(branch: params[:branch], street: params[:street], city: params[:city], state: params[:state])
         if @dojo.save
-        redirect_to "/" 
+            redirect_to "/" 
         else 
-            flash[:error] = "All fields must be filled with at least 2 characters!"
+            flash[:errors] = @dojo.errors.full_messages
             redirect_to "/dojos/new"
         end  
-    end             
+    end  
+    def show
+        @dojo = Dojo.find(params[:id])
+        @cohort = @dojo.students
+        render "show" 
+    end 
+    def edit
+       @dojo = Dojo.find(params[:id])
+       render "edit"    
+    end      
+    def update
+        @dojo = Dojo.find(params[:id])
+        if @dojo.update(branch: params[:branch], street: params[:street], city: params[:city], state: params[:state])
+            redirect_to "/"
+        else
+            flash[:errors] = @dojo.errors.full_messages
+            redirect_to :back  
+        end
+    end
+    def destroy
+        @dojo = Dojo.find(params[:id]) 
+        @dojo.delete 
+        redirect_to "/"  
+    end                 
 end

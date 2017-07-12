@@ -13,7 +13,11 @@
         <td><%= dojo.street %></td>
         <td><%= dojo.city %></td>
         <td><%= dojo.state %></td>
-        <td><a href="/dojos/<%= dojo.id %>/show">Show</a> | <a href="/dojos/<%= dojo.id %>/edit">Edit</a> | <a href="/dojos/<%= dojo.id %>/destroy">Destroy</a></td>
+        <td>
+            <a href="/dojos/<%= dojo.id %>">Show</a> | 
+            <a href="/dojos/<%= dojo.id %>/edit">Edit</a> | 
+            <a href="/dojos/<%= dojo.id %>" data-method="delete">Destroy</a>
+        </td>
     </tr>
     <% end %>    
 </table>
